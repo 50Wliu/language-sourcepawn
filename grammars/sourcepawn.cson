@@ -1,0 +1,780 @@
+'scopeName': 'source.sourcepawn'
+'name': 'Sourcepawn'
+'fileTypes': [
+	'sp'
+	'inc'
+]
+'name': 'Sourcepawn'
+'patterns': [
+	{
+		'include': '#special_block'
+	}
+#	{
+#		'include': 'source.c' #Temporary until I can get things sorted out
+#	}
+	{
+		'include': '#preprocessor-rule-enabled'
+	}
+	{
+		'include': '#preprocessor-rule-disabled'
+	}
+	{
+		'include': '#preprocessor-rule-other'
+	}
+	{
+		'include': '#comments'
+	}
+	{
+		'match': '\\b(break|case|continue|default|do|else|for|if|return|switch|while)\\b'
+		'name': 'keyword.control.sp'
+	}
+	{
+		'match': ';'
+		'name': 'punctuation.terminator.sp'
+	}
+	{
+		'match': '\\b(any|bool|int|Float|String|Handle|Action)\\b:'
+		'name': 'storage.type.legacy.sp'
+	}
+	{
+		'match': '\\b(any|bool|char|enum|float|int|struct|union|void)\\b'
+		'name': 'storage.type.sp'
+	}
+	{
+		'match': '\\b(const|static)\\b'
+		'name': 'storage.modifier.sp'
+	}
+	{
+		'match': '\\b(NULL|true|false|TRUE|FALSE)\\b'
+		'name': 'constant.language.sp'
+	}
+	{
+		'include': '#sizeof'
+	}
+	{
+		'match': '\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b'
+		'name': 'constant.numeric.sp'
+	}
+	{
+		'begin': '"'
+		'beginCaptures':
+			'0':
+				'name': 'punctuation.definition.string.begin.sp'
+		'end': '"'
+		'endCaptures':
+			'0':
+				'name': 'punctuation.definition.string.end.sp'
+		'name': 'string.quoted.double.sp'
+		'patterns': [
+			{
+				'include': '#string_escaped_char'
+			}
+			{
+				'include': '#string_placeholder'
+			}
+		]
+	}
+	{
+		'begin': '\''
+		'beginCaptures':
+			'0':
+				'name': 'punctuation.definition.string.begin.sp'
+		'end': '\''
+		'endCaptures':
+			'0':
+				'name': 'punctuation.definition.string.end.sp'
+		'name': 'string.quoted.single.sp'
+		'patterns': [
+			{
+				'include': '#string_escaped_char'
+			}
+		]
+	}
+	{
+		'begin': '(?x)\n                \t\t^\\s*\\#\\s*(define)\\s+                         # define\n                \t\t((?<id>[a-zA-Z_][a-zA-Z0-9_]*))    # macro name\n                \t\t(?:                                                            # and optionally:\n                \t\t        (\\()                                                 # an open parenthesis\n                \t\t                (\n                \t\t                        \\s* \\g<id> \\s*             # first argument\n                \t\t                        ((,) \\s* \\g<id> \\s*)*    # additional arguments\n                \t\t                        (?:\\.\\.\\.)?                    # varargs ellipsis?\n                \t\t                )\n                \t\t        (\\))                                                 # a close parenthesis\n                \t\t)?\n                \t'
+		'beginCaptures':
+			'1':
+				'name': 'keyword.control.import.define.sp'
+			'2':
+				'name': 'entity.name.function.preprocessor.sp'
+			'4':
+				'name': 'punctuation.definition.parameters.begin.sp'
+			'5':
+				'name': 'variable.parameter.preprocessor.sp'
+			'7':
+				'name': 'punctuation.separator.parameters.sp'
+			'8':
+				'name': 'punctuation.definition.parameters.end.sp'
+		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
+		'name': 'meta.preprocessor.macro.sp'
+		'patterns': [
+			{
+				'match': '(?>\\\\\\s*\\n)'
+				'name': 'punctuation.separator.continuation.sp'
+			}
+			{
+				'include': '$base'
+			}
+		]
+	}
+	{
+		'begin':'^\\s*\\#\\s*(undef)\\s+([a-zA-Z_][a-zA-Z0-9_]*)'
+		'beginCaptures':
+			'1':
+				'name': 'keyword.control.import.undef.sp'
+			'2':
+				'name': 'entity.name.function.preprocessor.sp'
+		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
+		'name': 'meta.preprocessor.macro.sp'
+		'patterns': [
+			{
+				'match': '(?>\\\\\\s*\\n)'
+				'name': 'punctuation.separator.continuation.sp'
+			}
+			{
+				'include': '$base'
+			}
+		]
+	}
+	{
+		'begin': '^\\s*#\\s*(error|warning)\\b'
+		'captures':
+			'1':
+				'name': 'keyword.control.import.error.sp'
+		'end': '(?<!\\\\)(?=\\n)'
+		'name': 'meta.preprocessor.diagnostic.sp'
+		'patterns': [
+			{
+				'match': '(?>\\\\\\s*\\n)'
+				'name': 'punctuation.separator.continuation.sp'
+			}
+		]
+	}
+	{
+		'begin': '^\\s*#\\s*(include|tryinclude)\\b\\s+'
+		'captures':
+			'1':
+				'name': 'keyword.control.include.sp'
+		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
+		'name': 'meta.preprocessor.sp.include'
+		'patterns': [
+			{
+				'match': '(?>\\\\\\s*\\n)'
+				'name': 'punctuation.separator.continuation.sp'
+			}
+			{
+				'begin': '"'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.sp'
+				'end': '"'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.sp'
+				'name': 'string.quoted.double.include.sp'
+			}
+			{
+				'begin': '<'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.sp'
+				'end': '>'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.sp'
+				'name': 'string.quoted.other.lt-gt.include.sp'
+			}
+		]
+	}
+	{
+		'begin': '^\\s*#\\s*(define|defined|elif|else|if|ifdef|ifndef|pragma|undef)\\b'
+		'captures':
+			'1':
+				'name': 'keyword.control.import.sp'
+		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
+		'name': 'meta.preprocessor.sp'
+		'patterns': [
+			{
+				'match': '(?>\\\\\\s*\\n)'
+				'name': 'punctuation.separator.continuation.sp'
+			}
+		]
+	}
+	{
+		'include': '#block'
+	}
+	{
+		'begin': '(?x)\n        \t\t(?:    ^                                                                 # begin-of-line\n        \t\t    |    \n        \t\t         (?: (?= \\s )                     (?<!else|new|return) (?<=\\w)            #    or word + space before name\n        \t\t             | (?= \\s*[A-Za-z_] ) (?<!&&)             (?<=[*&>])     #    or type modifier before name\n        \t\t         )\n        \t\t)\n        \t\t(\\s*) (?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()\n        \t\t(\n        \t\t\t(?: [A-Za-z_][A-Za-z0-9_]*+ | :: )++ |                                    # actual name\n        \t\t\t(?: (?<=operator) (?: [-*&<>=+!]+ | \\(\\) | \\[\\] ) )    # if it is a C++ operator\n        \t\t)\n        \t\t \\s*(?=\\()'
+		'beginCaptures':
+			'1':
+				'name': 'punctuation.whitespace.function.leading.sp'
+			'3':
+				'name': 'entity.name.function.sp'
+			'4':
+				'name': 'punctuation.definition.parameters.sp'
+		'end': '(?<=\\})|(?=#)|(;)'
+		'name': 'meta.function.sp'
+		'patterns': [
+			{
+				'include': '#comments'
+			}
+			{
+				'include': '#parens'
+			}
+			{
+				'match': '\\bconst\\b'
+				'name': 'storage.modifier.sp'
+			}
+			{
+				'include': '#block'
+			}
+		]
+	}
+	{
+		'match': '\\bdelete\\b(\\s*\\[\\])?|\\bnew\\b(?!])|\\bdecl\\b'
+		'name': 'keyword.control.sp'
+	}
+	{
+		'match': '\\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq)\\b'
+		'name': 'keyword.operator.sp'
+	}
+	{
+		'begin': '(?x)\n        \t\t\t\t(?:    ^                                                                 # begin-of-line\n        \t\t\t\t    |    (?: (?<!else|new|=) )                         #    or word + space before name\n        \t\t\t\t)\n        \t\t\t\t((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n        \t\t\t\t \\s*(\\()                                                     # start bracket or end-of-line\n        \t\t\t'
+		'beginCaptures':
+			'1':
+				'name': 'entity.name.function.sp'
+			'2':
+				'name': 'punctuation.definition.parameters.begin.sp'
+		'end': '\\)'
+		'endCaptures':
+			'0':
+				'name': 'punctuation.definition.parameters.end.sp'
+		'name': 'meta.function.destructor.sp'
+		'patterns': [
+			{
+				'include': '$base'
+			}
+		]
+	}
+	{
+		'begin': '(?x)\n        \t\t\t\t(?:    ^                                                                 # begin-of-line\n        \t\t\t\t    |    (?: (?<!else|new|=) )                         #    or word + space before name\n        \t\t\t\t)\n        \t\t\t\t((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n        \t\t\t\t \\s*(\\()                                                     # terminating semi-colon\n        \t\t\t'
+		'beginCaptures':
+			'1':
+				'name': 'entity.name.function.sp'
+			'2':
+				'name': 'punctuation.definition.parameters.begin.sp'
+		'end': '\\)'
+		'endCaptures':
+			'0':
+				'name': 'punctuation.definition.parameters.end.sp'
+				'name': 'meta.function.destructor.prototype.sp'
+		'patterns': [
+			{
+				'include': '$base'
+			}
+		]
+	}
+]
+'repository':
+	'block':
+		'patterns': [
+			{
+				'begin': '\\{'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.section.block.begin.sp'
+				'end': '\\}'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.section.block.end.sp'
+				'name': 'meta.block.sp'
+				'patterns': [
+					{
+						'include': '#block_innards'
+					}
+				]
+			}
+		]
+	'block_innards':
+		'patterns': [
+			{
+				'include': '#preprocessor-rule-enabled-block'
+			}
+			{
+				'include': '#preprocessor-rule-disabled-block'
+			}
+			{
+				'include': '#preprocessor-rule-other-block'
+			}
+			{
+				'include': '#sizeof'
+			}
+			{
+				'captures':
+					'1':
+						'name': 'punctuation.whitespace.function-call.leading.sp'
+					'2':
+						'name': 'support.function.any-method.sp'
+					'3':
+						'name': 'punctuation.definition.parameters.sp'
+				'match': '(?x) (?: (?= \\s )  (?:(?<=else|new|return) | (?<!\\w)) (\\s+))?\n\t\t\t(\\b \n\t\t\t\t(?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()(?:(?!NS)[A-Za-z_][A-Za-z0-9_]*+\\b | :: )++                  # actual name\n\t\t\t)\n\t\t\t \\s*(\\()'
+				'name': 'meta.function-call.sp'
+			}
+			{
+				'include': '$base'
+			}
+		]
+	'comments':
+		'patterns': [
+			{
+				'begin': '/\\*'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.comment.begin.sp'
+				'end': '\\*/'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.comment.end.sp'
+				'name': 'comment.block.sp'
+			}
+			{
+				'match': '\\*/.*\\n'
+				'name': 'invalid.illegal.stray-comment-end.sp'
+			}
+			{
+				'begin': '(^[ \\t]+)?(?=//)'
+				'beginCaptures':
+					'1':
+						'name': 'punctuation.whitespace.comment.leading.sp'
+				'end': '(?!\\G)'
+				'patterns': [
+					{
+						'begin': '//'
+						'beginCaptures':
+							'0':
+								'name': 'punctuation.definition.comment.sp'
+						'end': '\\n'
+						'name': 'comment.line.double-slash.sp'
+						'patterns': [
+							{
+								'match': '(?>\\\\\\s*\\n)'
+								'name': 'punctuation.separator.continuation.sp'
+							}
+						]
+					}
+				]
+			}
+		]
+	'disabled':
+		'begin': '^\\s*#\\s*if(n?def)?\\b.*$'
+		'end': '^\\s*#\\s*(endif)\\b'
+		'patterns': [
+			{
+				'include': '#disabled'
+			}
+		]
+	'parens':
+		'begin': '\\('
+		'beginCaptures':
+			'0':
+				'name': 'punctuation.section.parens.begin.sp'
+		'end': '\\)'
+		'endCaptures':
+			'0':
+				'name': 'punctuation.section.parens.end.sp'
+		'name': 'meta.parens.sp'
+		'patterns': [
+			{
+				'include': '$base'
+			}
+		]
+	'preprocessor-rule-disabled':
+		'begin': '^\\s*(#(if)\\s+(0)\\b).*'
+		'comment': '#if 0'
+		'captures':
+			'1':
+				'name': 'meta.preprocessor.sp'
+			'2':
+				'name': 'keyword.control.import.if.sp'
+			'3':
+				'name': 'constant.numeric.preprocessor.sp'
+		'end': '^\\s*(#\\s*(endif)\\b)'
+		'patterns': [
+			{
+				'begin': '^\\s*(#\\s*(else)\\b)'
+				'captures':
+					'1':
+						'name': 'meta.preprocessor.sp'
+					'2':
+						'name': 'keyword.control.import.else.sp'
+				'end': '(?=^\\s*#\\s*endif\\b)'
+				'patterns': [
+					{
+						'include': '$base'
+					}
+				]
+			}
+			{
+				'begin': ''
+				'end': '(?=^\\s*#\\s*(else|endif)\\b)'
+				'name': 'comment.block.preprocessor.if-branch'
+				'patterns': [
+					{
+						'include': '#disabled'
+					}
+				]
+			}
+		]
+	'preprocessor-rule-disabled-block':
+		'begin': '^\\s*(#(if)\\s+(0)\\b).*'
+		'comment': '#if 0'
+		'captures':
+			'1':
+				'name': 'meta.preprocessor.sp'
+			'2':
+				'name': 'keyword.control.import.if.sp'
+			'3':
+				'name': 'constant.numeric.preprocessor.sp'
+		'end': '^\\s*(#\\s*(endif)\\b)'
+		'patterns': [
+			{
+				'begin': '^\\s*(#\\s*(else)\\b)'
+				'captures':
+					'1':
+						'name': 'meta.preprocessor.sp'
+					'2':
+						'name': 'keyword.control.import.else.sp'
+				'end': '(?=^\\s*#\\s*endif\\b)'
+				'patterns': [
+					{
+						'include': '#block_innards'
+					}
+				]
+			}
+			{
+				'begin': ''
+				'end': '(?=^\\s*#\\s*(else|endif)\\b)'
+				'name': 'comment.block.preprocessor.if-branch.in-block'
+				'patterns': [
+					{
+						'include': '#disabled'
+					}
+				]
+			}
+		]
+	'preprocessor-rule-enabled':
+		'begin': '^\\s*(#(if)\\s+(0*1)\\b)'
+		'comment': '#if 1'
+		'captures':
+			'1':
+				'name': 'meta.preprocessor.sp'
+			'2':
+				'name': 'keyword.control.import.if.sp'
+			'3':
+				'name': 'constant.numeric.preprocessor.sp'
+		'end': '^\\s*(#\\s*(endif)\\b)'
+		'patterns': [
+			{
+				'begin': '^\\s*(#\\s*(else)\\b).*'
+				'captures':
+					'1':
+						'name': 'meta.preprocessor.sp'
+					'2':
+						'name': 'keyword.control.import.else.sp'
+				'contentName': 'comment.block.preprocessor.else-branch'
+				'end': '(?=^\\s*#\\s*endif\\b)'
+				'patterns': [
+					{
+						'include': '#disabled'
+					}
+				]
+			}
+			{
+				'begin': ''
+				'end': '(?=^\\s*#\\s*(else|endif)\\b)'
+				'patterns': [
+					{
+						'include': '$base'
+					}
+				]
+			}
+		]
+	'preprocessor-rule-enabled-block':
+		'begin': '^\\s*(#(if)\\s+(0*1)\\b)'
+		'comment': '#if 1'
+		'captures':
+			'1':
+				'name': 'meta.preprocessor.sp'
+			'2':
+				'name': 'keyword.control.import.if.sp'
+			'3':
+				'name': 'constant.numeric.preprocessor.sp'
+		'end': '^\\s*(#\\s*(endif)\\b)'
+		'patterns': [
+			{
+				'begin': '^\\s*(#\\s*(else)\\b).*'
+				'captures':
+					'1':
+						'name': 'meta.preprocessor.sp'
+					'2':
+						'name': 'keyword.control.import.else.sp'
+				'contentName': 'comment.block.preprocessor.else-branch.in-block'
+				'end': '(?=^\\s*#\\s*endif\\b)'
+				'patterns': [
+					{
+						'include': '#disabled'
+					}
+				]
+			}
+			{
+				'begin': ''
+				'end': '(?=^\\s*#\\s*(else|endif)\\b)'
+				'patterns': [
+					{
+						'include': '#block_innards'
+					}
+				]
+			}
+		]
+	'preprocessor-rule-other':
+		'begin': '^\\s*(#\\s*(if(n?def)?)\\b.*?(?:(?=(?://|/\\*))|$))'
+		'captures':
+			'1':
+				'name': 'meta.preprocessor.sp'
+			'2':
+				'name': 'keyword.control.import.sp'
+		'end': '^\\s*(#\\s*(endif)\\b)'
+		'patterns': [
+			{
+				'include': '$base'
+			}
+		]
+	'preprocessor-rule-other-block':
+		'begin': '^\\s*(#\\s*(if(n?def)?)\\b.*?(?:(?=(?://|/\\*))|$))'
+		'captures':
+			'1':
+				'name': 'meta.preprocessor.sp'
+			'2':
+				'name': 'keyword.control.import.sp'
+		'end': '^\\s*(#\\s*(endif)\\b)'
+		'patterns': [
+			{
+				'include': '#block_innards'
+			}
+		]
+	'sizeof':
+		'match': '\\b(sizeof)\\b'
+		'name': 'keyword.operator.sizeof.sp'
+	'string_escaped_char':
+		'patterns': [
+			{
+				'match': '\\\\(\\\\|[abefnprtv\'"?]|[0-3]\\d{,2}|[4-7]\\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})'
+				'name': 'constant.character.escape.sp'
+			}
+			{
+				'match': '\\\\.'
+				'name': 'invalid.illegal.unknown-escape.sp'
+			}
+		]
+	'string_placeholder':
+		'patterns': [
+			{
+				'match': '(?x)%\n(\\d+\\$)? # field (argument #)\n[#0\\- +\']* # flags\n[,;:_]? # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)? # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)? # precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspnNLtT%] # conversion type'
+				'name': 'constant.other.placeholder.sp'
+			}
+			{
+				'match': '%'
+				'name': 'invalid.illegal.placeholder.sp'
+			}
+		]
+	'angle_brackets':
+		'begin': '<'
+		'end': '>'
+		'name': 'meta.angle-brackets.sp'
+		'patterns': [
+			{
+				'include': '#angle_brackets'
+			}
+			{
+				'include': '$base'
+			}
+		]
+	'constructor':
+		'patterns': [
+			{
+				'begin': '(?x)\n        \t\t\t\t(?:    ^\\s*)                                                         # begin-of-line\n        \t\t\t\t((?!while|for|do|if|else|switch|catch|enumerate|r?iterate)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n        \t\t\t\t \\s*(\\()                                                        # start bracket or end-of-line\n        \t\t\t'
+				'beginCaptures':
+					'1':
+						'name': 'entity.name.function.sp'
+					'2':
+						'name': 'punctuation.definition.parameters.begin.sp'
+				'end': '\\)'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.parameters.end.sp'
+				'name': 'meta.function.constructor.sp'
+				'patterns': [
+					{
+						'include': '$base'
+					}
+				]
+			}
+			{
+				'begin': '(?x)\n        \t\t\t\t(:)                                                        # begin-of-line\n        \t\t\t\t((?=\\s*[A-Za-z_][A-Za-z0-9_:]* # actual name\n        \t\t\t\t \\s*(\\()))                                            # start bracket or end-of-line\n        \t\t\t'
+				'beginCaptures':
+					'1':
+						'name': 'punctuation.definition.parameters.sp'
+				'end': '(?=\\{)'
+				'name': 'meta.function.constructor.initializer-list.sp'
+				'patterns': [
+					{
+						'include': '$base'
+					}
+				]
+			}
+		]
+	'special_block':
+		'patterns': [
+			{
+				"begin": "\\b(using)\\b\\s*(namespace)\\b\\s*((?:[_A-Za-z][_A-Za-z0-9]*\\b(::)?)*)",
+				"beginCaptures": {
+					"1": {
+						"name": "keyword.control.sp"
+					},
+					"2": {
+						"name": "storage.type.sp"
+					},
+					"3": {
+						"name": "entity.name.type.sp"
+					}
+				},
+				"end": "(;)",
+				"name": "meta.using-namespace-declaration.sp"
+			},
+			{
+				'begin': '\\b(namespace)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+'
+				'beginCaptures':
+					'1':
+						'name': 'storage.type.sp'
+					'2':
+						'name': 'entity.name.type.sp'
+				'captures':
+					'1':
+						'name': 'keyword.control.namespace.$2'
+				'end': '(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))'
+				'name': 'meta.namespace-block.sp'
+				'patterns': [
+					{
+						'begin': '\\{'
+						'beginCaptures':
+							'0':
+								'name': 'punctuation.definition.scope.sp'
+						'end': '\\}'
+						'endCaptures':
+							'0':
+								'name': 'punctuation.definition.scope.sp'
+						'patterns': [
+							{
+								'include': '#special_block'
+							}
+							{
+								'include': '#constructor'
+							}
+							{
+								'include': '$base'
+							}
+						]
+					}
+					{
+						'include': '$base'
+					}
+				]
+			}
+			{
+				'begin': '\\b(class|struct)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?'
+				'beginCaptures':
+					'1':
+						'name': 'storage.type.sp'
+					'2':
+						'name': 'entity.name.type.sp'
+					'4':
+						'name': 'storage.type.modifier.sp'
+					'5':
+						'name': 'entity.name.type.inherited.sp'
+					'6':
+						'patterns': [
+							{
+								'match': '(public|protected|private)'
+								'name': 'storage.type.modifier.sp'
+							}
+							{
+								'match': '[_A-Za-z][_A-Za-z0-9]*'
+								'name': 'entity.name.type.inherited.sp'
+							}
+						]
+				'end': '(?<=\\})|(?=(;|\\(|\\)|>|\\[|\\]|=))'
+				'name': 'meta.class-struct-block.sp'
+				'patterns': [
+					{
+						'include': '#angle_brackets'
+					}
+					{
+						'begin': '\\{'
+						'beginCaptures':
+							'0':
+								'name': 'punctuation.section.block.begin.sp'
+						'end': '(\\})(\\s*\\n)?'
+						'endCaptures':
+							'1':
+								'name': 'punctuation.section.block.end.sp'
+							'2':
+								'name': 'invalid.illegal.you-forgot-semicolon.sp'
+						'patterns': [
+							{
+								'include': '#special_block'
+							}
+							{
+								'include': '#constructor'
+							}
+							{
+								'include': '$base'
+							}
+						]
+					}
+					{
+						'include': '$base'
+					}
+				]
+			}
+			{
+				'begin': '\\b(extern)(?=\\s*")'
+				'beginCaptures':
+					'1':
+						'name': 'storage.modifier.c++'
+				'end': '(?<=\\})|(?=\\w)'
+				'name': 'meta.extern-block.c++'
+				'patterns': [
+					{
+						'begin': '\\{'
+						'beginCaptures':
+							'0':
+								'name': 'punctuation.section.block.begin.sp'
+						'end': '\\}'
+						'endCaptures':
+							'0':
+								'name': 'punctuation.section.block.end.sp'
+						'patterns': [
+							{
+								'include': '#special_block'
+							}
+							{
+								'include': '$base'
+							}
+						]
+					}
+					{
+						'include': '$base'
+					}
+				]
+			}
+		]
