@@ -9,9 +9,6 @@
 	{
 		'include': '#special_block'
 	}
-#	{
-#		'include': 'source.c' #Temporary until I can get things sorted out
-#	}
 	{
 		'include': '#preprocessor-rule-enabled'
 	}
@@ -29,19 +26,61 @@
 		'name': 'keyword.control.sp'
 	}
 	{
+		'match': '\\?|:'
+		'name': 'keyword.control.ternary.sp'
+	}
+	{
+		'match': '(<<|>>>?|~|\\^)'
+		'name': 'keyword.operator.bitwise.sp'
+	}
+	{
+		'match': '((&|\\^|\\||<<|>>>?)=)'
+		'name': 'keyword.operator.assignment.bitwise.sp'
+	}
+	{
+		'match': '(==|!=|<=|>=|<|>)'
+		'name': 'keyword.operator.comparison.sp'
+	}
+	{
+		'match': '([+*/%-]=)'
+		'name': 'keyword.operator.assignment.arithmetic.sp'
+	}
+	{
+		'match': '(=)'
+		'name': 'keyword.operator.assignment.sp'
+	}
+	{
+		'match': '(\\-\\-|\\+\\+)'
+		'name': 'keyword.operator.increment-decrement.sp'
+	}
+	{
+		'match': '(\\-|\\+|\\*|\\/|%)'
+		'name': 'keyword.operator.arithmetic.sp'
+	}
+	{
+		'match': '(!|&&|\\|\\|)'
+		'name': 'keyword.operator.logical.sp'
+	}
+	{
+		'match': '(\\||&)'
+		'name': 'keyword.operator.bitwise.sp'
+	}
+	{
 		'match': ';'
 		'name': 'punctuation.terminator.sp'
 	}
 	{
-		'match': '\\b(any|bool|int|Float|String|Handle|Action)\\b:'
+		'match': '\\b(Float|String|Handle|Action)\\b:'
+		'comment': 'Pre-1.7'
 		'name': 'storage.type.legacy.sp'
 	}
 	{
-		'match': '\\b(any|bool|char|enum|float|int|struct|union|void)\\b'
+		'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|void)\\b'
+		'comment': 'SM 1.7+'
 		'name': 'storage.type.sp'
 	}
 	{
-		'match': '\\b(const|static)\\b'
+		'match': '\\b(const|final|native|public|static)\\b'
 		'name': 'storage.modifier.sp'
 	}
 	{
@@ -679,93 +718,6 @@
 							}
 							{
 								'include': '#constructor'
-							}
-							{
-								'include': '$base'
-							}
-						]
-					}
-					{
-						'include': '$base'
-					}
-				]
-			}
-			{
-				'begin': '\\b(class|struct)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?'
-				'beginCaptures':
-					'1':
-						'name': 'storage.type.sp'
-					'2':
-						'name': 'entity.name.type.sp'
-					'4':
-						'name': 'storage.type.modifier.sp'
-					'5':
-						'name': 'entity.name.type.inherited.sp'
-					'6':
-						'patterns': [
-							{
-								'match': '(public|protected|private)'
-								'name': 'storage.type.modifier.sp'
-							}
-							{
-								'match': '[_A-Za-z][_A-Za-z0-9]*'
-								'name': 'entity.name.type.inherited.sp'
-							}
-						]
-				'end': '(?<=\\})|(?=(;|\\(|\\)|>|\\[|\\]|=))'
-				'name': 'meta.class-struct-block.sp'
-				'patterns': [
-					{
-						'include': '#angle_brackets'
-					}
-					{
-						'begin': '\\{'
-						'beginCaptures':
-							'0':
-								'name': 'punctuation.section.block.begin.sp'
-						'end': '(\\})(\\s*\\n)?'
-						'endCaptures':
-							'1':
-								'name': 'punctuation.section.block.end.sp'
-							'2':
-								'name': 'invalid.illegal.you-forgot-semicolon.sp'
-						'patterns': [
-							{
-								'include': '#special_block'
-							}
-							{
-								'include': '#constructor'
-							}
-							{
-								'include': '$base'
-							}
-						]
-					}
-					{
-						'include': '$base'
-					}
-				]
-			}
-			{
-				'begin': '\\b(extern)(?=\\s*")'
-				'beginCaptures':
-					'1':
-						'name': 'storage.modifier.c++'
-				'end': '(?<=\\})|(?=\\w)'
-				'name': 'meta.extern-block.c++'
-				'patterns': [
-					{
-						'begin': '\\{'
-						'beginCaptures':
-							'0':
-								'name': 'punctuation.section.block.begin.sp'
-						'end': '\\}'
-						'endCaptures':
-							'0':
-								'name': 'punctuation.section.block.end.sp'
-						'patterns': [
-							{
-								'include': '#special_block'
 							}
 							{
 								'include': '$base'
