@@ -84,7 +84,7 @@
 		'name': 'storage.modifier.sp'
 	}
 	{
-		'match': '\\b(NULL|true|false|TRUE|FALSE)\\b'
+		'match': '\\b(NULL|true|false|TRUE|FALSE|INVALID_HANDLE)\\b'
 		'name': 'constant.language.sp'
 	}
 	{
