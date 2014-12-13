@@ -7,9 +7,6 @@
 'name': 'Sourcepawn'
 'patterns': [
 	{
-		'include': '#special_block'
-	}
-	{
 		'include': '#preprocessor-rule-enabled'
 	}
 	{
@@ -20,6 +17,12 @@
 	}
 	{
 		'include': '#comments'
+	}
+	{
+		'include': '#sizeof'
+	}
+	{
+		'include': '#storage'
 	}
 	{
 		'match': '\\b(break|case|continue|default|do|else|for|if|return|switch|while)\\b'
@@ -70,25 +73,8 @@
 		'name': 'punctuation.terminator.sp'
 	}
 	{
-		'match': '\\b(Float|String|Handle|Action)\\b:'
-		'comment': 'Pre-1.7'
-		'name': 'storage.type.legacy.sp'
-	}
-	{
-		'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|void)\\b'
-		'comment': 'SM 1.7+'
-		'name': 'storage.type.sp'
-	}
-	{
-		'match': '\\b(const|final|native|public|static|stock)\\b'
-		'name': 'storage.modifier.sp'
-	}
-	{
 		'match': '\\b(NULL|true|false|TRUE|FALSE|INVALID_HANDLE)\\b'
 		'name': 'constant.language.sp'
-	}
-	{
-		'include': '#sizeof'
 	}
 	{
 		'match': '\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b'
@@ -243,13 +229,15 @@
 		'include': '#block'
 	}
 	{
-		'begin': '(?x)\n        \t\t(?:    ^                                                                 # begin-of-line\n        \t\t    |    \n        \t\t         (?: (?= \\s )                     (?<!else|new|return) (?<=\\w)            #    or word + space before name\n        \t\t             | (?= \\s*[A-Za-z_] ) (?<!&&)             (?<=[*&>])     #    or type modifier before name\n        \t\t         )\n        \t\t)\n        \t\t(\\s*) (?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()\n        \t\t(\n        \t\t\t(?: [A-Za-z_][A-Za-z0-9_]*+ | :: )++ |                                    # actual name\n        \t\t\t(?: (?<=operator) (?: [-*&<>=+!]+ | \\(\\) | \\[\\] ) )    # if it is a C++ operator\n        \t\t)\n        \t\t \\s*(?=\\()'
+		'begin': '(?x)\n (?: ^ # begin-of-line\n | \n (?: (?= \\s ) (?<!else|new|return) (?<=\\w) # or word + space before name\n ))\n (\\s*) ([A-Za-z_][A-Za-z0-9_]*:) # legacy tag system\n (?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()\n (\n (?: [A-Za-z_][A-Za-z0-9_]*+ | :: )++ | # actual name\n )\n \\s*(?=\\()'
 		'beginCaptures':
 			'1':
 				'name': 'punctuation.whitespace.function.leading.sp'
-			'3':
-				'name': 'entity.name.function.sp'
+			'2':
+				'name': 'storage.type.legacy.sp'
 			'4':
+				'name': 'entity.name.function.sp'
+			'5':
 				'name': 'punctuation.definition.parameters.sp'
 		'end': '(?<=\\})|(?=#)|(;)'
 		'name': 'meta.function.sp'
@@ -259,10 +247,6 @@
 			}
 			{
 				'include': '#parens'
-			}
-			{
-				'match': '\\bconst\\b'
-				'name': 'storage.modifier.sp'
 			}
 			{
 				'include': '#block'
@@ -604,6 +588,23 @@
 	'sizeof':
 		'match': '\\b(sizeof)\\b'
 		'name': 'keyword.operator.sizeof.sp'
+	'storage':
+		'patterns': [
+			{
+				'match': '\\b(_|any|bool|enum|Float|String|Handle|Action)\\b(:)'
+				'comment': 'Pre-1.7'
+				'name': 'storage.type.legacy.sp'
+			}
+			{
+				'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|void)\\b(?!:)'
+				'comment': 'SM 1.7+'
+				'name': 'storage.type.sp'
+			}
+			{
+				'match': '\\b(const|final|native|public|static|stock)\\b'
+				'name': 'storage.modifier.sp'
+			}
+		]
 	'string_escaped_char':
 		'patterns': [
 			{
@@ -666,64 +667,6 @@
 				'end': '(?=\\{)'
 				'name': 'meta.function.constructor.initializer-list.sp'
 				'patterns': [
-					{
-						'include': '$base'
-					}
-				]
-			}
-		]
-	'special_block':
-		'patterns': [
-			{
-				"begin": "\\b(using)\\b\\s*(namespace)\\b\\s*((?:[_A-Za-z][_A-Za-z0-9]*\\b(::)?)*)",
-				"beginCaptures": {
-					"1": {
-						"name": "keyword.control.sp"
-					},
-					"2": {
-						"name": "storage.type.sp"
-					},
-					"3": {
-						"name": "entity.name.type.sp"
-					}
-				},
-				"end": "(;)",
-				"name": "meta.using-namespace-declaration.sp"
-			},
-			{
-				'begin': '\\b(namespace)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+'
-				'beginCaptures':
-					'1':
-						'name': 'storage.type.sp'
-					'2':
-						'name': 'entity.name.type.sp'
-				'captures':
-					'1':
-						'name': 'keyword.control.namespace.$2'
-				'end': '(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))'
-				'name': 'meta.namespace-block.sp'
-				'patterns': [
-					{
-						'begin': '\\{'
-						'beginCaptures':
-							'0':
-								'name': 'punctuation.definition.scope.sp'
-						'end': '\\}'
-						'endCaptures':
-							'0':
-								'name': 'punctuation.definition.scope.sp'
-						'patterns': [
-							{
-								'include': '#special_block'
-							}
-							{
-								'include': '#constructor'
-							}
-							{
-								'include': '$base'
-							}
-						]
-					}
 					{
 						'include': '$base'
 					}
