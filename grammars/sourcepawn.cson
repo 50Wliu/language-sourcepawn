@@ -212,7 +212,7 @@
 		]
 	}
 	{
-		'begin': '^\\s*#\\s*(define|defined|elif|else|if|ifdef|ifndef|pragma|undef)\\b'
+		'begin': '^\\s*#\\s*(define|elif|else|endinput|if|ifdef|ifndef|pragma|undef)\\b'
 		'captures':
 			'1':
 				'name': 'keyword.control.import.sp'
