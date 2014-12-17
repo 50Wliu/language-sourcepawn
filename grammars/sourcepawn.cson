@@ -601,7 +601,7 @@
 				'name': 'storage.type.sp'
 			}
 			{
-				'match': '\\b(const|final|native|public|static|stock)\\b'
+				'match': '\\b(const|final|forward|native|public|static|stock)\\b'
 				'name': 'storage.modifier.sp'
 			}
 		]
