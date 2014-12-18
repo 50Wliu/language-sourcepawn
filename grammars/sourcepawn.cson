@@ -229,7 +229,7 @@
 		'include': '#block'
 	}
 	{
-		'begin': '(?x)\n (?: ^ # begin-of-line\n | \n (?: (?= \\s ) (?<!else|new|return) (?<=\\w) # or word + space before name\n ))\n (\\s*) ([A-Za-z_][A-Za-z0-9_]*:) # legacy tag system\n (?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()\n (\n (?: [A-Za-z_][A-Za-z0-9_]*+ | :: )++ | # actual name\n )\n \\s*(?=\\()'
+		'begin': '(?x)\n (?: ^ # begin-of-line\n | \n (?: (?= \\s ) (?<!else|new|return) (?<=\\w) # or word + space before name\n ))\n (\\s*) ([A-Za-z_][A-Za-z0-9_]*:)? # legacy tag system\n (?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()\n ([A-Za-z_][A-Za-z0-9_]*+) # actual name\n \\s*(?=\\()'
 		'beginCaptures':
 			'1':
 				'name': 'punctuation.whitespace.function.leading.sp'
