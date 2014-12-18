@@ -73,7 +73,7 @@
 		'name': 'punctuation.terminator.sp'
 	}
 	{
-		'match': '\\b(NULL|true|false|TRUE|FALSE|INVALID_HANDLE)\\b'
+		'match': '\\b(NULL|true|false|TRUE|FALSE|INVALID_HANDLE|Plugin_Continue|Plugin_Changed|Plugin_Handled|Plugin_Stop)\\b'
 		'name': 'constant.language.sp'
 	}
 	{
