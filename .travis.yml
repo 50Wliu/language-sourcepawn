@@ -2,5 +2,9 @@ language: 'objective-c'
 
 script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
 
+sudo: false #For faster build start times
+
+depth: 10 #For faster test times
+
 notifications:
     email: false
