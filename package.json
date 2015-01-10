@@ -1,11 +1,11 @@
 {
 	"name": "language-sourcepawn",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Sourcepawn language support in Atom",
 	"repository": "https://github.com/50Wliu/language-sourcepawn",
 	"license": "MIT",
 	"engines": {
-		"atom": "*"
+		"atom": ">=0.166.0"
 	},
 	"_atomModuleCache": {
 		"version": 1,

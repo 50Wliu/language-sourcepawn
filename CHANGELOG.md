@@ -1,3 +1,7 @@
+## 0.3.1 - January 10, 2015 A.D.
+* Renamed deprecated `scoped-properties` folder to `settings`
+* Added initial specs
+
 ## 0.3.0 - December 19, 2014 A.D.
 * Fixed untagged functions (eg `public ThisIsAFunction()` or `AnotherFunction()`) not being scoped
 * Added `Plugin_Continue`, `Plugin_Changed`, `Plugin_Handled`, and `Plugin_Stop` as constants

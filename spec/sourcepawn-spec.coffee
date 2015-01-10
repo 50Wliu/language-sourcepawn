@@ -11,5 +11,5 @@ describe 'Sourcepawn grammar', ->
 	it 'parses the grammar', ->
 		expect(grammar).toBeTruthy()
 		expect(grammar.scopeName).toBe 'source.sourcepawn'
-	
+
 	#TODO
