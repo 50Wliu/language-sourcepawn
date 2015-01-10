@@ -1,5 +1,6 @@
 ## 0.3.1 - January 10, 2015 A.D.
 * Renamed deprecated `scoped-properties` folder to `settings`
+	* This package now requires at least Atom version 0.166.0 as a result
 * Added initial specs
 
 ## 0.3.0 - December 19, 2014 A.D.
