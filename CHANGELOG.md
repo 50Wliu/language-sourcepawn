@@ -1,3 +1,8 @@
+## 0.4.0 - January 18, 2015 A.D.
+* Fixed snippets not working
+* Fixed settings not working
+* Scoped all legacy tags, even user-created ones
+
 ## 0.3.1 - January 10, 2015 A.D.
 * Renamed deprecated `scoped-properties` folder to `settings`
 	* This package now requires at least Atom version 0.166.0 as a result

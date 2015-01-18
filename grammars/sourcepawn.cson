@@ -591,7 +591,7 @@
 	'storage':
 		'patterns': [
 			{
-				'match': '\\b(_|any|bool|enum|Float|String|Handle|Action)\\b(:)'
+				'match': '\\b([A-Za-z_]\\w*)\\b(:)'
 				'comment': 'Pre-1.7'
 				'name': 'storage.type.legacy.sp'
 			}
