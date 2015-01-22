@@ -1,6 +1,6 @@
 {
 	"name": "language-sourcepawn",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"description": "Sourcepawn language support in Atom",
 	"repository": "https://github.com/50Wliu/language-sourcepawn",
 	"license": "MIT",

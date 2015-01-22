@@ -258,10 +258,6 @@
 		'name': 'keyword.control.sp'
 	}
 	{
-		'match': '\\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq)\\b'
-		'name': 'keyword.operator.sp'
-	}
-	{
 		'begin': '(?x)\n        \t\t\t\t(?:    ^                                                                 # begin-of-line\n        \t\t\t\t    |    (?: (?<!else|new|=) )                         #    or word + space before name\n        \t\t\t\t)\n        \t\t\t\t((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n        \t\t\t\t \\s*(\\()                                                     # start bracket or end-of-line\n        \t\t\t'
 		'beginCaptures':
 			'1':

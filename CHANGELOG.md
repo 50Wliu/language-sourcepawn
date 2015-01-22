@@ -1,3 +1,8 @@
+## 0.4.1 - January 21, 2015 A.D.
+* Removed language-specific settings as they were causing problems
+	* Default ones seem to work fine
+* Removed some unused regex (`and`, `bitand`, etc.)
+
 ## 0.4.0 - January 18, 2015 A.D.
 * Fixed snippets not working
 * Fixed settings not working
