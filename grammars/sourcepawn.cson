@@ -29,8 +29,8 @@
 		'name': 'keyword.control.sp'
 	}
 	{
-		'match': '(?:^\\w*(?<!case)\\s*|(?:(?=\\s)(?<!case)(?<=\\w)))\\s*(?:\\?|(?<!default):)'
-		#'match': '\\?|:'
+		#'match': '(?:^\\w*(?<!case)\\s*|(?:(?=\\s)(?<!case)(?<=\\w)))\\s*(?:\\?|(?<!default):)'
+		'match': '\\?|:'
 		'name': 'keyword.control.ternary.sp'
 	}
 	{
@@ -74,7 +74,7 @@
 		'name': 'punctuation.terminator.sp'
 	}
 	{
-		'match': '\\b(null|true|false|INVALID_HANDLE|Plugin_Continue|Plugin_Changed|Plugin_Handled|Plugin_Stop)\\b'
+		'match': '\\b(null|true|false|INVALID_HANDLE|APLRes_Success|APLRes_Failure|APLRes_SilentFailure|Plugin_Continue|Plugin_Changed|Plugin_Handled|Plugin_Stop)\\b'
 		'name': 'constant.language.sp'
 	}
 	{
@@ -595,13 +595,13 @@
 		'patterns': [
 			{
 				#This can probably be cleaned up considerably, but it'll have to do for now
-				'match': '(?:^\\w*(?<!case)\\s*|=|>|<|\\(|,\\s*|(?:(?=\\s)(?<!case)(?<=\\w)))\\s*\\b([A-Za-z_]\\w*)(?<!default)\\b(:)'
-				#'match': '\\b([A-Za-z_]\\w*)\\b(:)'
+				#'match': '(?:^\\w*(?<!case)\\s*|=|>|<|\\(|,\\s*|(?:(?=\\s)(?<!case)(?<=\\w)))\\s*\\b([A-Za-z_]\\w*)(?<!default)\\b(:)'
+				'match': '\\b([A-Za-z_]\\w*)\\b(:)'
 				'comment': 'Pre-1.7'
 				'name': 'storage.type.legacy.sp'
 			}
 			{
-				'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|void|Action|Handle)\\b(?!:)'
+				'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|void|Action|Handle|Plugin)\\b(?!:)'
 				'comment': 'SM 1.7+'
 				'name': 'storage.type.sp'
 			}
