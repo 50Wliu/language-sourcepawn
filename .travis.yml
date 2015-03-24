@@ -1,4 +1,4 @@
-language: 'objective-c'
+language: 'objective-c' #For Mac
 
 script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
 
