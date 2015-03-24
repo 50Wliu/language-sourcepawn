@@ -5,7 +5,7 @@
 			#ifndef ${1:SYMBOL}
 			#define ${2:SYMBOL} ${3:value}
 			#endif
-			"""
+		"""
 	'#include <>':
 		'prefix': 'Inc'
 		'body': '#include <${1}>'
@@ -15,14 +15,14 @@
 	'#define':
 		'prefix': 'define'
 		'body': '#define ${1:SYMBOL}'
-	'For Loop': #Currently broken
+	'For Loop':
 		'prefix': 'for'
 		'body': """
 			for(${1:int} ${2:i} = ${3:0}; $2 ${4:<} ${5:count}; $2${6:++})
 			{
 				${7:/* code */}
 			}
-			"""
+		"""
 	'Do While Loop':
 		'prefix': 'do'
 		'body': """
@@ -31,7 +31,7 @@
 				${0:/* code */}
 			}
 			while(${1:/* condition */});
-			"""
+		"""
 	'While Loop':
 		'prefix': 'while'
 		'body': """
@@ -39,7 +39,7 @@
 			{
 				${2:/* code */}
 			}
-			"""
+		"""
 	'If Condition':
 		'prefix': 'if'
 		'body': """
@@ -47,7 +47,7 @@
 			{
 				${2:/* code */}
 			}
-			"""
+		"""
 	'If Else':
     	'prefix': 'ife'
     	'body': """
@@ -59,7 +59,7 @@
 			{
 				${3:/* code */}
 			}
-			"""
+		"""
 	'Switch Statement':
     	'prefix': 'switch'
     	'body': """
@@ -71,7 +71,7 @@
 				}
 				$0
 			}
-			"""
+		"""
 	'case':
     	'prefix': 'case'
     	'body': """
@@ -80,7 +80,7 @@
 				${2:/* code */}
 			}
 			$0
-			"""
+		"""
 	'default':
 		'prefix': 'default'
 		'body': """
@@ -88,7 +88,7 @@
 			{
 				${1:/* code */}
 			}
-			"""
+		"""
 	'Enumeration':
 		'prefix': 'enum'
 		'body': """
@@ -96,4 +96,4 @@
 			{
 				$0
 			};
-			"""
+		"""

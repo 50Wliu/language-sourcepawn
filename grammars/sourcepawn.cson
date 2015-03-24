@@ -217,12 +217,10 @@
 		]
 	}
 	{
-		'begin': '^\\s*#\\s*(define|elif|else|endinput|if|ifdef|ifndef|pragma|undef)\\b\\s+([a-zA-Z_]\\w*)'
+		'begin': '^\\s*#\\s*(define|elif|else|endinput|if|ifdef|ifndef|pragma|undef)\\b)'
 		'captures':
 			'1':
 				'name': 'keyword.control.import.sp'
-			'2':
-				'name': 'variable.parameter.sp'
 		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
 		'name': 'meta.preprocessor.sp'
 		'patterns': [
