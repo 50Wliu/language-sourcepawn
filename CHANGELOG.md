@@ -1,3 +1,12 @@
+## 0.4.2 - March 23, 2015 A.D.
+* Improved new-style syntax support
+	* Scoped `Action` and `Handle` (@viderizer)
+	* Scoped `Plugin`
+	* Scoped `null` as a constant and removed `NULL`
+* Scoped `APLRes_Success`, `APLRes_Failure`, and `APLRes_SilentFailure` as constants
+* Scoped all-caps variables as constants (eg `TIMER_FLAG_NO_MAPCHANGE`)
+* Cleaned up and improved some snippets
+
 ## 0.4.1 - January 21, 2015 A.D.
 * Removed language-specific settings as they were causing problems
 	* Default ones seem to work fine
