@@ -13,7 +13,7 @@
 		"sp"
 		"sourcemod"
 		"language"
-	}
+	},
 	"_atomModuleCache": {
 		"version": 1,
 		"dependencies": [],
