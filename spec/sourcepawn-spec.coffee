@@ -9,7 +9,7 @@ describe 'Sourcepawn grammar', ->
 			grammar=atom.grammars.grammarForScopeName('source.sourcepawn')
 
 	it 'parses the grammar', ->
-		expect grammar.toBeTruthy()
-		expect grammar.scopeName.toBe 'source.sourcepawn'
+		expect(grammar).toBeTruthy()
+		expect(grammar).scopeName.toBe 'source.sourcepawn'
 
 	#TODO

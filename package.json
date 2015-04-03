@@ -5,8 +5,15 @@
 	"repository": "https://github.com/50Wliu/language-sourcepawn",
 	"license": "MIT",
 	"engines": {
-		"atom": ">=0.166.0"
+		"atom": ">=0.166.0 <2.0.0"
 	},
+	"keywords": {
+		"grammar"
+		"sourcepawn"
+		"sp"
+		"sourcemod"
+		"language"
+	}
 	"_atomModuleCache": {
 		"version": 1,
 		"dependencies": [],
