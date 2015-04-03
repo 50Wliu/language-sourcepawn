@@ -1,3 +1,8 @@
+## 0.4.3 - April 2, 2015 A.D.
+* Numbers after a `#pragma` are now tokenized
+* Hex color codes (eg `\x0700FF00`) are now tokenized correctly
+* Added keywords
+
 ## 0.4.2 - March 23, 2015 A.D.
 * Improved new-style syntax support
 	* Scoped `Action` and `Handle` (@viderizer)
