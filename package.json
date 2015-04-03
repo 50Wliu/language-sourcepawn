@@ -8,10 +8,10 @@
 		"atom": ">=0.166.0 <2.0.0"
 	},
 	"keywords": {
-		"grammar"
-		"sourcepawn"
-		"sp"
-		"sourcemod"
+		"grammar",
+		"sourcepawn",
+		"sp",
+		"sourcemod",
 		"language"
 	},
 	"_atomModuleCache": {
