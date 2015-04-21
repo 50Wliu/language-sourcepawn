@@ -1,4 +1,4 @@
-'.source.sourcepawn':
+'.source.sp':
 	'#ifndef ... #define ... #endif':
 		'prefix': 'def'
 		'body': """

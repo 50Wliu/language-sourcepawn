@@ -9,7 +9,7 @@ module.exports =
 			description: 'Overrides PHP behavior in .inc files due to an Atom limitation'
 
 fileTypes =
-	'.inc': 'source.sourcepawn'
+	'.inc': 'source.sp'
 
 	activate: ->
 		atom.workspace.observeTextEditors (editor) ->

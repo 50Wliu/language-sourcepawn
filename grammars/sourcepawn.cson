@@ -4,7 +4,6 @@
 	'sp'
 	'inc'
 ]
-'name': 'Sourcepawn'
 'patterns': [
 	{
 		'include': '#preprocessor-rule-enabled'
