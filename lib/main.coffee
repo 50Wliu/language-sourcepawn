@@ -8,13 +8,11 @@ module.exports =
 			title: 'Use Sourcepawn grammar for .inc files'
 			description: 'Overrides PHP behavior in .inc files due to an Atom limitation'
 
-fileTypes =
-	'.inc': 'source.sp'
-
-	activate: ->
+	activate: (state) ->
 		atom.workspace.observeTextEditors (editor) ->
-			scopeName = fileTypes[extname editor.getPaths()[0]]
-			return unless scopeName?
-			grammar = atom.grammars.grammarForScopeName scopeName
-			return unless grammar?
-			editor.setGrammar grammar
+			if atom.config.get 'language-sourcepawn.useSourcepawnForIncFiles'
+				extension = extname editor.getTitle()
+				if extension is '.inc'
+					scopeName = 'source.sp'
+					grammar = atom.grammars.grammarForScopeName scopeName
+					editor.setGrammar grammar unless grammar?
