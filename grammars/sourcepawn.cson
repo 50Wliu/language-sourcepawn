@@ -3,6 +3,7 @@
 'fileTypes': [
 	'sp'
 	'inc'
+	'sma'
 ]
 'patterns': [
 	{
