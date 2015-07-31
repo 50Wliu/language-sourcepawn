@@ -32,3 +32,13 @@ describe 'Sourcepawn grammar', ->
 			expect(tokens[0]).toEqual value: 'APLRes_Success', scopes: ['source.sp', 'constant.language.sp']
 			{tokens} = grammar.tokenizeLine('Plugin_Continue')
 			expect(tokens[0]).toEqual value: 'Plugin_Continue', scopes: ['source.sp', 'constant.language.sp']
+
+	describe 'preprocessors', ->
+		it 'tokenizes them', ->
+			{tokens} = grammar.tokenizeLine('#define HI 64')
+			expect(tokens[0]).toEqual value: '#', scopes: ['source.sp', 'meta.preprocessor.macro.sp', 'punctuation.definition.keyword.sp']
+			expect(tokens[1]).toEqual value: 'define', scopes: ['source.sp', 'meta.preprocessor.macro.sp', 'keyword.control.import.define.sp']
+			expect(tokens[2]).toEqual value: ' ', scopes: ['source.sp', 'meta.preprocessor.macro.sp']
+			expect(tokens[3]).toEqual value: 'HI', scopes: ['source.sp', 'meta.preprocessor.macro.sp', 'entity.name.function.preprocessor.sp']
+			expect(tokens[4]).toEqual value: ' ', scopes: ['source.sp', 'meta.preprocessor.macro.sp']
+			expect(tokens[5]).toEqual value: '64', scopes: ['source.sp', 'meta.preprocessor.macro.sp', 'constant.numeric.sp']

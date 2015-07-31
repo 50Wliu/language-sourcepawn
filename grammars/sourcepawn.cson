@@ -120,19 +120,21 @@
 		]
 	}
 	{
-		'begin': '(?x)\n                \t\t^\\s*\\#\\s*(define)\\s+                         # define\n                \t\t((?<id>[a-zA-Z_]\\w*))    # macro name\n                \t\t(?:                                                            # and optionally:\n                \t\t        (\\()                                                 # an open parenthesis\n                \t\t                (\n                \t\t                        \\s* \\g<id> \\s*             # first argument\n                \t\t                        ((,) \\s* \\g<id> \\s*)*    # additional arguments\n                \t\t                        (?:\\.\\.\\.)?                    # varargs ellipsis?\n                \t\t                )\n                \t\t        (\\))                                                 # a close parenthesis\n                \t\t)?\n                \t'
+		'begin': '^\\s*(#)\\s*(define)\\s+((?<id>[a-zA-Z_]\\w*))(?:(\\()(\\s*\\g<id>\\s*((,)\\s*\\g<id>\\s*)*(?:\\.\\.\\.)?)(\\)))?'
 		'beginCaptures':
 			'1':
-				'name': 'keyword.control.import.define.sp'
+				'name': 'punctuation.definition.keyword.sp'
 			'2':
+				'name': 'keyword.control.import.define.sp'
+			'3':
 				'name': 'entity.name.function.preprocessor.sp'
-			'4':
-				'name': 'punctuation.definition.parameters.begin.sp'
 			'5':
+				'name': 'punctuation.definition.parameters.begin.sp'
+			'6':
 				'name': 'variable.parameter.preprocessor.sp'
-			'7':
-				'name': 'punctuation.separator.parameters.sp'
 			'8':
+				'name': 'punctuation.separator.parameters.sp'
+			'9':
 				'name': 'punctuation.definition.parameters.end.sp'
 		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
 		'name': 'meta.preprocessor.macro.sp'
@@ -147,11 +149,13 @@
 		]
 	}
 	{
-		'begin':'^\\s*\\#\\s*(undef)\\s+([a-zA-Z_]\\w*)'
+		'begin':'^\\s*(#)\\s*(undef)\\s+([a-zA-Z_]\\w*)'
 		'beginCaptures':
 			'1':
-				'name': 'keyword.control.import.undef.sp'
+				'name': 'punctuation.definition.keyword.sp'
 			'2':
+				'name': 'keyword.control.import.undef.sp'
+			'3':
 				'name': 'entity.name.function.preprocessor.sp'
 		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
 		'name': 'meta.preprocessor.macro.sp'
@@ -166,9 +170,11 @@
 		]
 	}
 	{
-		'begin': '^\\s*#\\s*(error|warning)\\b'
+		'begin': '^\\s*(#)\\s*(error|warning)\\b'
 		'captures':
 			'1':
+				'name': 'punctuation.definition.keyword.sp'
+			'2':
 				'name': 'keyword.control.import.error.sp'
 		'end': '(?<!\\\\)(?=\\n)'
 		'name': 'meta.preprocessor.diagnostic.sp'
@@ -180,9 +186,11 @@
 		]
 	}
 	{
-		'begin': '^\\s*#\\s*(include|tryinclude)\\b\\s+'
+		'begin': '^\\s*(#)\\s*(include|tryinclude)\\b\\s+'
 		'captures':
 			'1':
+				'name': 'punctuation.definition.keyword.sp'
+			'2':
 				'name': 'keyword.control.include.sp'
 		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
 		'name': 'meta.preprocessor.include.sp'
@@ -216,9 +224,11 @@
 		]
 	}
 	{
-		'begin': '^\\s*#\\s*(define|elif|else|endinput|if|ifdef|ifndef|pragma|undef)\\b'
+		'begin': '^\\s*(#)\\s*(define|elif|else|endinput|if|ifdef|ifndef|pragma|undef)\\b'
 		'captures':
 			'1':
+				'name': 'punctuation.definition.keyword.sp'
+			'2':
 				'name': 'keyword.control.import.sp'
 		'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
 		'name': 'meta.preprocessor.sp'
@@ -566,13 +576,15 @@
 			}
 		]
 	'preprocessor-rule-other':
-		'begin': '^\\s*(#\\s*(if(n?def)?)\\b.*?(?:(?=(?://|/\\*))|$))'
+		'begin': '^\\s*((#)\\s*(if(n?def)?)\\b.*?(?:(?=(?://|/\\*))|$))'
 		'captures':
 			'1':
 				'name': 'meta.preprocessor.sp'
 			'2':
+				'name': 'punctuation.definition.keyword.sp'
+			'3':
 				'name': 'keyword.control.import.sp'
-		'end': '^\\s*(#\\s*(endif)\\b)'
+		'end': '^\\s*((#)\\s*(endif)\\b)'
 		'patterns': [
 			{
 				'include': '$base'
