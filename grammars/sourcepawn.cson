@@ -616,7 +616,7 @@
 				'name': 'storage.type.legacy.sp'
 			}
 			{
-				'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|void|Action|Handle|Plugin)\\b(?!:)'
+				'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|void|Action|Handle|ConVar|KeyValues|Plugin|StringMap|TopMenu|APLRes)\\b(?!:)'
 				'comment': 'SM 1.7+'
 				'name': 'storage.type.sp'
 			}
