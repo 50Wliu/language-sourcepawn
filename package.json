@@ -1,27 +1,27 @@
 {
-	"name": "language-sourcepawn",
-	"version": "0.5.0",
-	"description": "Sourcepawn language support in Atom",
-	"repository": "https://github.com/50Wliu/language-sourcepawn",
-	"license": "MIT",
-	"engines": {
-		"atom": ">=0.200.0 <2.0.0"
-	},
-	"keywords": [
-		"grammar",
-		"sourcepawn",
-		"sp",
-		"sourcemod",
-		"language"
-	],
-	"_atomModuleCache": {
-		"version": 1,
-		"dependencies": [],
-		"extensions": {
-			".json": [
-				"package.json"
-			]
-		},
-		"folders": []
-	}
+  "name": "language-sourcepawn",
+  "version": "0.5.1",
+  "description": "Sourcepawn language support in Atom",
+  "repository": "https://github.com/50Wliu/language-sourcepawn",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.200.0 <2.0.0"
+  },
+  "keywords": [
+    "grammar",
+    "sourcepawn",
+    "sp",
+    "sourcemod",
+    "language"
+  ],
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
 }
