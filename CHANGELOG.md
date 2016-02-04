@@ -1,3 +1,10 @@
+## 0.6.0 - February 3, 2016 A.D.
+* Sync with [language-c](https://github.com/atom/language-c) to bring in many improvements
+* Remove unnecessary rules
+* Conform code style to match other language repositories (2 spaces)
+* Enable Coffeelint
+* More improvements coming soon!
+
 ## 0.5.1 - February 2, 2016 A.D.
 * Changed `scopeName` to `source.sp` instead of `source.sourcepawn`
 * Removed `.inc` setting and bumped minimum required Atom version to v0.200.0
