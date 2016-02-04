@@ -1,99 +1,99 @@
 '.source.sp':
-	'#ifndef ... #define ... #endif':
-		'prefix': 'def'
-		'body': """
-			#ifndef ${1:SYMBOL}
-			#define ${2:SYMBOL} ${3:value}
-			#endif
-		"""
-	'#include <>':
-		'prefix': 'Inc'
-		'body': '#include <${1}>'
-	'#include ""':
-    	'prefix': 'inc'
-    	'body': '#include "${1:.sp}"'
-	'#define':
-		'prefix': 'define'
-		'body': '#define ${1:SYMBOL}'
-	'For Loop':
-		'prefix': 'for'
-		'body': """
-			for(${1:int} ${2:i} = ${3:0}; $2 ${4:<} ${5:count}; $2${6:++})
-			{
-				${7:/* code */}
-			}
-		"""
-	'Do While Loop':
-		'prefix': 'do'
-		'body': """
-			do
-			{
-				${0:/* code */}
-			}
-			while(${1:/* condition */});
-		"""
-	'While Loop':
-		'prefix': 'while'
-		'body': """
-			while(${1:/* condition */})
-			{
-				${2:/* code */}
-			}
-		"""
-	'If Condition':
-		'prefix': 'if'
-		'body': """
-			if(${1:/* condition */})
-			{
-				${2:/* code */}
-			}
-		"""
-	'If Else':
-    	'prefix': 'ife'
-    	'body': """
-			if(${1:/* condition */})
-			{
-				${2:/* code */}
-			}
-			else
-			{
-				${3:/* code */}
-			}
-		"""
-	'Switch Statement':
-    	'prefix': 'switch'
-    	'body': """
-			switch(${1:/* expression */})
-			{
-				case ${2:/* value */}:
-				{
-					${3:/* code */}
-				}
-				$0
-			}
-		"""
-	'case':
-    	'prefix': 'case'
-    	'body': """
-			case ${1:/* value */}:
-			{
-				${2:/* code */}
-			}
-			$0
-		"""
-	'default':
-		'prefix': 'default'
-		'body': """
-			default:
-			{
-				${1:/* code */}
-			}
-		"""
-	'Enumeration':
-		'prefix': 'enum'
-		'body': """
-			enum ${1:name}
-			{
-				$0
-			};
-		"""
+  '#ifndef ... #define ... #endif':
+    'prefix': 'def'
+    'body': """
+      #ifndef ${1:SYMBOL}
+      #define ${2:SYMBOL} ${3:value}
+      #endif
+    """
+  '#include <>':
+    'prefix': 'Inc'
+    'body': '#include <${1}>'
+  '#include ""':
+    'prefix': 'inc'
+    'body': '#include "${1:.sp}"'
+  '#define':
+    'prefix': 'define'
+    'body': '#define ${1:SYMBOL}'
+  'For Loop':
+    'prefix': 'for'
+    'body': """
+      for(${1:int} ${2:i} = ${3:0}; $2 ${4:<} ${5:count}; $2${6:++})
+      {
+        ${7:/* code */}
+      }
+    """
+  'Do While Loop':
+    'prefix': 'do'
+    'body': """
+      do
+      {
+        ${0:/* code */}
+      }
+      while(${1:/* condition */});
+    """
+  'While Loop':
+    'prefix': 'while'
+    'body': """
+      while(${1:/* condition */})
+      {
+        ${2:/* code */}
+      }
+    """
+  'If Condition':
+    'prefix': 'if'
+    'body': """
+      if(${1:/* condition */})
+      {
+        ${2:/* code */}
+      }
+    """
+  'If Else':
+    'prefix': 'ife'
+    'body': """
+      if(${1:/* condition */})
+      {
+        ${2:/* code */}
+      }
+      else
+      {
+        ${3:/* code */}
+      }
+    """
+  'Switch Statement':
+    'prefix': 'switch'
+    'body': """
+      switch(${1:/* expression */})
+      {
+        case ${2:/* value */}:
+        {
+          ${3:/* code */}
+        }
+        $0
+      }
+    """
+  'case':
+    'prefix': 'case'
+    'body': """
+      case ${1:/* value */}:
+      {
+        ${2:/* code */}
+      }
+      $0
+    """
+  'default':
+    'prefix': 'default'
+    'body': """
+      default:
+      {
+        ${1:/* code */}
+      }
+    """
+  'Enumeration':
+    'prefix': 'enum'
+    'body': """
+      enum ${1:name}
+      {
+        $0
+      };
+    """
