@@ -1,3 +1,16 @@
+## 0.5.1 - February 2, 2016 A.D.
+* Changed `scopeName` to `source.sp` instead of `source.sourcepawn`
+* Removed `.inc` setting and bumped minimum required Atom version to v0.200.0
+	* Atom versions v0.200.0 and above support setting custom languages for files
+* Added support for `.sma` files
+* Rudimentary support for preprocessor definitions (the `#` in `#define`, for example)
+	* Taken from [atom/language-c#79](https://github.com/atom/language-c/pull/79)
+* Scoped `ConVar`, `KeyValues`, `Plugin`, `StringMap`, `TopMenu`, and `APLRes` as storage types
+* Added basic specs to test against regressions
+
+## 0.5.0 - April 10, 2015 A.D.
+* Added a setting to force `.inc` files to use Sourcepawn highlighting
+
 ## 0.4.3 - April 2, 2015 A.D.
 * Numbers after a `#pragma` are now tokenized
 * Hex color codes (eg `\x0700FF00`) are now tokenized correctly
