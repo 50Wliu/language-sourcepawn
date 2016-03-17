@@ -203,11 +203,9 @@
   }
   {
     'begin': '''(?x)
-      (?:
-        ^ |
-        (?:(?=\\s)(?<!else|new|return)(?<=\\w)) # word + space before name
-      )
-      (\\s*)
+      (?:^|(?<=\\*\\/))\\s*
+      \\b(forward|native|public|static|stock)?\\b\\s*
+      (?!while|for|do|if|else|switch|return|sizeof)
       (?:
         \\b([a-zA-Z_$][a-zA-Z_$0-9]*)\\b\\s*    # newdecl tag system
         |
@@ -219,11 +217,11 @@
     '''
     'beginCaptures':
       '1':
-        'name': 'punctuation.whitespace.function.leading.sp'
+        'name': 'storage.modifier.sp'
       '2':
-        'name': 'storage.type.legacy.sp'
-      '3':
         'name': 'storage.type.sp'
+      '3':
+        'name': 'storage.type.legacy.sp'
       '4':
         'name': 'entity.name.function.sp'
       '5':
@@ -675,7 +673,7 @@
         'name': 'storage.type.sp'
       }
       {
-        'match': '\\b(const|final|forward|native|public|static|stock)\\b'
+        'match': '\\b(const|final)\\b'
         'name': 'storage.modifier.sp'
       }
     ]
