@@ -40,6 +40,38 @@ describe 'Sourcepawn grammar', ->
       {tokens} = grammar.tokenizeLine 'Plugin_Continue'
       expect(tokens[0]).toEqual value: 'Plugin_Continue', scopes: ['source.sp', 'constant.language.sp']
 
+  describe 'types', ->
+    it 'tokenizes legacy tags', ->
+      {tokens} = grammar.tokenizeLine 'bool:isAlive'
+      expect(tokens[0]).toEqual value: 'bool:', scopes: ['source.sp', 'storage.type.legacy.sp']
+      expect(tokens[1]).toEqual value: 'isAlive', scopes: ['source.sp']
+
+      {tokens} = grammar.tokenizeLine 'Action:action'
+      expect(tokens[0]).toEqual value: 'Action:', scopes: ['source.sp', 'storage.type.legacy.sp']
+      expect(tokens[1]).toEqual value: 'action', scopes: ['source.sp']
+
+      {tokens} = grammar.tokenizeLine 'bool: isAlive'
+      expect(tokens[0]).toEqual value: 'bool:', scopes: ['source.sp', 'storage.type.legacy.sp']
+      expect(tokens[1]).toEqual value: ' isAlive', scopes: ['source.sp']
+
+      {tokens} = grammar.tokenizeLine 'bool :isAlive'
+      expect(tokens[0]).not.toEqual value: 'bool:', scopes: ['source.sp', 'storage.type.legacy.sp']
+
+      {tokens} = grammar.tokenizeLine 'else:isAlive'
+      expect(tokens[0]).not.toEqual value: 'else:', scopes: ['source.sp', 'storage.type.legacy.sp']
+
+    it 'tokenizes newdecl types', ->
+      {tokens} = grammar.tokenizeLine 'bool isAlive'
+      expect(tokens[0]).toEqual value: 'bool', scopes: ['source.sp', 'storage.type.sp']
+      expect(tokens[1]).toEqual value: ' isAlive', scopes: ['source.sp']
+
+      {tokens} = grammar.tokenizeLine 'Action action'
+      expect(tokens[0]).toEqual value: 'Action', scopes: ['source.sp', 'storage.type.sp']
+      expect(tokens[1]).toEqual value: ' action', scopes: ['source.sp']
+
+      {tokens} = grammar.tokenizeLine 'else isAlive'
+      expect(tokens[0]).not.toEqual value: 'else', scopes: ['source.sp', 'storage.type.sp']
+
   describe 'the return keyword', ->
     it 'tokenizes return statements', ->
       {tokens} = grammar.tokenizeLine 'return'
