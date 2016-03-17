@@ -1,3 +1,9 @@
+## 0.7.0 - March 17, 2016 A.D.
+* Fixed complex return statements being tokenized as functions
+* Fixed functions with return types but no storage modifier (such as `bool:hello() {}`) not being tokenized as functions
+* Fixed `storage.type.sp` and `storage.type.legacy.sp` getting switched in functions
+* Added more specs
+
 ## 0.6.0 - February 3, 2016 A.D.
 * Sync with [language-c](https://github.com/atom/language-c) to bring in many improvements
 * Remove unnecessary rules
