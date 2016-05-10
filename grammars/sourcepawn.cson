@@ -673,7 +673,7 @@
         'name': 'storage.type.sp'
       }
       {
-        'match': '\\b(const|final)\\b'
+        'match': '\\b(const|final|public|static)\\b'
         'name': 'storage.modifier.sp'
       }
     ]
