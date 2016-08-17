@@ -1,3 +1,6 @@
+## 0.7.1 - August 17, 2016 A.D.
+* Added `public` and `static` as valid storage modifiers
+
 ## 0.7.0 - March 17, 2016 A.D.
 * Fixed complex return statements being tokenized as functions
 * Fixed functions with return types but no storage modifier (such as `bool:hello() {}`) not being tokenized as functions
