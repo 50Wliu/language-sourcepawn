@@ -1,6 +1,6 @@
 {
   "name": "language-sourcepawn",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Atom language support for Sourcepawn",
   "homepage": "https://atom.io/packages/language-sourcepawn",
   "repository": {
