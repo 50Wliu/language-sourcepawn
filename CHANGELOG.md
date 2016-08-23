@@ -1,3 +1,6 @@
+## 0.7.2 - August 22, 2016 A.D.
+* Added `Database`, `Menu`, and `Panel` as valid storage types (@DjCoraxa)
+
 ## 0.7.1 - August 17, 2016 A.D.
 * Added `public` and `static` as valid storage modifiers
 
