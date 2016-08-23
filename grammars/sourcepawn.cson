@@ -668,7 +668,7 @@
         'name': 'storage.type.legacy.sp'
       }
       {
-        'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|Action|Handle|ConVar|KeyValues|Plugin|StringMap|TopMenu|APLRes)\\b(?!:)'
+        'match': '\\b(any|bool|char|enum|double|float|int|struct|typeset|Action|Handle|ConVar|KeyValues|Plugin|StringMap|TopMenu|APLRes|Database|Menu|Panel)\\b(?!:)'
         'comment': 'SM 1.7+'
         'name': 'storage.type.sp'
       }
